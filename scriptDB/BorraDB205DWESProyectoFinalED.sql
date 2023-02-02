@@ -1,0 +1,3 @@
+DROP DATABASE IF EXISTS DB205DWESProyectoFinal;
+
+DROP USER IF EXISTS 'user205DWESProyectoFinal'@'%';
