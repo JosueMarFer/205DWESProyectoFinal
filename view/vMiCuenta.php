@@ -11,7 +11,7 @@
         </div>
         <div class="formElement">
             <label for="descUsuario">Descripcion de usuario:</label>
-            <input class="obligatorio" type="text" id="descUsuario" name="descUsuario" value="<?php echo ($aErrores['descUsuario'] ? '' : $oUsuario->getDescUsuario()) ?>"/>
+            <input type="text" id="descUsuario" name="descUsuario" value="<?php echo ($aErrores['descUsuario'] ? '' : $oUsuario->getDescUsuario()) ?>"/>
             <?php (isset($aErrores['descUsuario'])) ? print '<p style="color: red; display: inline;">' . $aErrores['descUsuario'] . '</p>' : ''; ?>
         </div>
         <div class="formElement">

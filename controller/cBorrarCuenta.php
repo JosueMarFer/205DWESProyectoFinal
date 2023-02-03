@@ -54,14 +54,16 @@ if (isset($_REQUEST['borrarCuenta'])) {
     if ($entradaOK) {
 //modifica el usuario en la BBDD y lo elimina
 //destruye la sesion
-        $oUsuario = UsuarioPDO::borrarrUsuario($oUsuario);
-        $_SESSION['usuarioMiAplicacion'] = null;
-        unset($oUsuario);
-    session_destroy();
-//Redirige a inicio privado        
-        $_SESSION['paginaEnCurso'] = 'cambiarPassword';
-        header('Location: ./index.php');
-        exit();
+        $borrado = UsuarioPDO::borrarrUsuario($oUsuario);
+        if ($borrado) {
+            $_SESSION['usuarioMiAplicacion'] = null;
+            unset($oUsuario);
+            session_destroy();
+//Envia a inicio publico     
+            $_SESSION['paginaEnCurso'] = 'inicioPublico';
+            header('Location: ./index.php');
+            exit();
+        }
     }
 }
 require_once $aVistas['layout'];

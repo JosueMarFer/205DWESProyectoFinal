@@ -7,17 +7,17 @@
     <fieldset>
         <div class="formElement">
             <label for="nuevaContraseña">Nueva contraseña:</label>
-            <input class="obligatorio" type="password" id="nuevaContraseña" name="nuevaContraseña"/>
+            <input type="password" id="nuevaContraseña" name="nuevaContraseña"/>
             <?php (isset($aErrores['nuevaContraseña'])) ? print '<p style="color: red; display: inline;">' . $aErrores['nuevaContraseña'] . '</p>' : ''; ?>
         </div>
         <div class="formElement">
             <label for="contraseñaActual">Contraseña actual:</label>
-            <input class="obligatorio" type="password" id="contraseñaActual" name="contraseñaActual"/>
+            <input type="password" id="contraseñaActual" name="contraseñaActual"/>
             <?php (isset($aErrores['contraseñaActual'])) ? print '<p style="color: red; display: inline;">' . $aErrores['contraseñaActual'] . '</p>' : ''; ?>
         </div>
         <div class="formElement">
             <label for="repetirContraseñaActual">Repetir contraseña actual:</label>
-            <input class="obligatorio" type="password" id="repetirContraseñaActual" name="repetirContraseñaActual"/>
+            <input type="password" id="repetirContraseñaActual" name="repetirContraseñaActual"/>
             <?php (isset($aErrores['repetirContraseñaActual'])) ? print '<p style="color: red; display: inline;">' . $aErrores['repetirContraseñaActual'] . '</p>' : ''; ?>
         </div>
         <div class="formElement">

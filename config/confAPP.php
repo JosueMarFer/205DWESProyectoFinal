@@ -10,6 +10,8 @@ require_once './model/Usuario.php';
 require_once './model/UsuarioPDO.php';
 require_once './model/DBPDO.php';
 require_once './model/ERRORApp.php';
+require_once './model/Departamento.php';
+require_once './model/DepartamentoPDO.php';
 
 $aControladores = [
     'login' => './controller/cLogin.php',
@@ -22,7 +24,8 @@ $aControladores = [
     'rest' => './controller/cRest.php',
     'miCuenta' => './controller/cMiCuenta.php',
     'cambiarPassword' => './controller/cCambiarPassword.php',
-    'borrarCuenta' => './controller/cBorrarCuenta.php'
+    'borrarCuenta' => './controller/cBorrarCuenta.php',
+    'mtoDepartamentos' => './controller/cMtoDepartamentos.php'
 ];
 
 $aVistas = [
@@ -37,5 +40,6 @@ $aVistas = [
     'rest' => './view/vRest.php',
     'miCuenta' => './view/vMiCuenta.php',
     'cambiarPassword' => './view/vCambiarPassword.php',
-    'borrarCuenta' => './view/vBorrarCuenta.php'
+    'borrarCuenta' => './view/vBorrarCuenta.php',
+    'mtoDepartamentos' => './view/vMtoDepartamentos.php'
 ];

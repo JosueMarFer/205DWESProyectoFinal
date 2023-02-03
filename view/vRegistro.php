@@ -8,21 +8,21 @@
     <legend>Registro</legend>
     <div class="formElement">
       <label for="codUsuario">Codigo de usuario:</label>
-      <input class="obligatorio" type="text" id="codUsuario" name="codUsuario" value="<?php echo $_REQUEST['codUsuario'] ?? '' ?>"/>
+      <input type="text" id="codUsuario" name="codUsuario" value="<?php echo $_REQUEST['codUsuario'] ?? '' ?>"/>
       <?php (!is_null($aErrores['codUsuario'])) ? print '<p style="color: red; display: inline;">' . $aErrores['codUsuario'] . '</p>' : ''; ?>
     </div>
     <div class="formElement">
-      <label class="obligatorio" for="password">Contraseña:</label>
+      <label for="password">Contraseña:</label>
       <input type="password" id="password" name="password"/>
       <?php (!is_null($aErrores['password'])) ? print '<p style="color: red; display: inline;">' . $aErrores['password'] . '</p>' : ''; ?>
     </div>
     <div class="formElement">
-      <label class="obligatorio" for="repetirPassword">Repetir Contraseña:</label>
+      <label for="repetirPassword">Repetir Contraseña:</label>
       <input type="password" id="repetirPassword" name="repetirPassword"/>
       <?php (!is_null($aErrores['repetirPassword'])) ? print '<p style="color: red; display: inline;">' . $aErrores['repetirPassword'] . '</p>' : ''; ?>
     </div>
     <div class="formElement">
-      <label class="opcional" for="descUsuario">Descripcion de usuario:</label>
+      <label for="descUsuario">Descripcion de usuario:</label>
       <input type="text" id="descUsuario" name="descUsuario" value="<?php echo $_REQUEST['descUsuario'] ?? '' ?>"/>
       <?php (!is_null($aErrores['descUsuario'])) ? print '<p style="color: red; display: inline;">' . $aErrores['descUsuario'] . '</p>' : ''; ?>
     </div>

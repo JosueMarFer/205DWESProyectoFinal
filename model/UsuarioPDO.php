@@ -88,10 +88,9 @@ class UsuarioPDO implements UsuarioDB {
 //Funcion utilizada para borrar un usuario
     public static function borrarrUsuario($oUsuario) {
 //Definicion de la sentencia SQL
-        $sqlModificarUsuario = "DELETE * FROM T01_Usuario WHERE T01_CodUsuario = '{$oUsuario->getCodUsuario()}';";
+        $sqlModificarUsuario = "DELETE FROM T01_Usuario WHERE T01_CodUsuario = '{$oUsuario->getCodUsuario()}';";
 //Ejecucion de la sentencia usando la clase DBPDO
-        $oResultado = DBPDO::ejecutarConsulta($sqlModificarUsuario);
-        $borrado = $oResultado->fetchObject();
+        $borrado = DBPDO::ejecutarConsulta($sqlModificarUsuario);
 //Si el usuario es eliminado devuelve un objeto true, si no retorna un false;
         if ($borrado) {
             return true;

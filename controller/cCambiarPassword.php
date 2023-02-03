@@ -44,7 +44,7 @@ if (isset($_REQUEST['cambiarPassword'])) {
             $aErrores['repetirContraseñaActual'] = 'Las contraseñas no coinciden';
             $entradaOK = false;
         }
-        if ($_REQUEST['contraseñaActual'] != $_REQUEST['nuevaContraseña']) {
+        if ($_REQUEST['contraseñaActual'] == $_REQUEST['nuevaContraseña']) {
             $aErrores['nuevaContraseña'] = 'La nueva contraseña no debe coincidir con la actual';
             $entradaOK = false;
         }
@@ -64,7 +64,7 @@ if (isset($_REQUEST['cambiarPassword'])) {
 //Almacena en la sesion el objeto del usuario logeado        
         $_SESSION['usuarioMiAplicacion'] = $oUsuario;
 //Redirige a inicio privado        
-        $_SESSION['paginaEnCurso'] = 'cambiarPassword';
+        $_SESSION['paginaEnCurso'] = 'miCuenta';
         header('Location: ./index.php');
         exit();
     }

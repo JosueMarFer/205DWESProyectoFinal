@@ -17,13 +17,13 @@ if (isset($_REQUEST['volver'])) {
 }
 //Si se pulsa cambiar password envia a la pagina de cambiar password
 if (isset($_REQUEST['cambiarPassword'])) {
-    $_SESSION['paginaEnCurso'] = 'wip';
+    $_SESSION['paginaEnCurso'] = 'cambiarPassword';
     header('Location: ./index.php');
     exit();
 }
 //Si se pulsa borrar cuenta envia a la pagina de borrar cuenta
 if (isset($_REQUEST['borrarCuenta'])) {
-    $_SESSION['paginaEnCurso'] = 'wip';
+    $_SESSION['paginaEnCurso'] = 'borrarCuenta';
     header('Location: ./index.php');
     exit();
 }
@@ -58,7 +58,7 @@ if (isset($_REQUEST['editarPerfil'])) {
 //Almacena en la sesion el objeto del usuario logeado        
         $_SESSION['usuarioMiAplicacion'] = $oUsuario;
 //Redirige a inicio privado        
-        $_SESSION['paginaEnCurso'] = 'miCuenta';
+        $_SESSION['paginaEnCurso'] = 'inicioPrivado';
         header('Location: ./index.php');
         exit();
     }
