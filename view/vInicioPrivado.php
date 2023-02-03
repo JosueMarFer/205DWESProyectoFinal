@@ -39,7 +39,7 @@ if (isset($_COOKIE['idioma'])) {
         <input type="submit" value="Detalle" name="detalle" />
         <input type="submit" value="Error" name="error" />
         <input type="submit" value="Mi cuenta" name="miCuenta" />
-        <input type="submit" value="Mantenimiento de departamentos" name="MtoDepartamentos" />
+        <input type="submit" value="Mantenimiento de departamentos" name="mtoDepartamentos" />
         <input type="submit" value="Rest" name="rest" />
     </div>
         <div class="formElement">             

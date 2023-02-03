@@ -38,8 +38,8 @@ if (isset($_REQUEST['miCuenta'])) {
     exit();
 }
 //Si se pulsa mantenimiento de departamentos envia a la pagina de mantenimiento de departamentos
-if (isset($_REQUEST['MtoDepartamentos'])) {
-    $_SESSION['paginaEnCurso'] = 'wip';
+if (isset($_REQUEST['mtoDepartamentos'])) {
+    $_SESSION['paginaEnCurso'] = 'mtoDepartamentos';
     header('Location: ./index.php');
     exit();
 }

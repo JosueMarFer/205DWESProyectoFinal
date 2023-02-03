@@ -35,8 +35,8 @@ if (isset($_REQUEST['registro'])) {
 //Comprueba si el usuario existe en la  BBDD en ese caso añade un registro al array de errores y la entrada pasa a ser false.
 //Si existe devuelve el objeto usuario y lo almacena en una variable
     if ($entradaOK) {
-        $oUsuario = UsuarioPDO::validarCodNoExiste($_REQUEST['codUsuario']);
-        if ($oUsuario) {
+        $usuarioExistente = UsuarioPDO::validarCodNoExiste($_REQUEST['codUsuario']);
+        if ($usuarioExistente) {
             $aErrores['codUsuario'] = 'El usuario ya existe';
             $entradaOK = false;
             $_REQUEST['codUsuario'] = null;
