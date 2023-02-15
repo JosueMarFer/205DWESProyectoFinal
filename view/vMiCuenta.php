@@ -7,16 +7,16 @@
     <fieldset>
         <div class="formElement">
             <label for="codUsuario">Codigo de usuario:</label>
-            <input class="bloqueado" type="text" id="codUsuario" name="codUsuario" value="<?php echo $oUsuario->getCodUsuario() ?>" disabled />
+            <input class="bloqueado" type="text" id="codUsuario" name="codUsuario" value="<?php echo $aUsuarioLogueado['codUsuario'] ?>" disabled />
         </div>
         <div class="formElement">
             <label for="descUsuario">Descripcion de usuario:</label>
-            <input type="text" id="descUsuario" name="descUsuario" value="<?php echo ($aErrores['descUsuario'] ? '' : $oUsuario->getDescUsuario()) ?>"/>
+            <input type="text" id="descUsuario" name="descUsuario" value="<?php echo ($aErrores['descUsuario'] ? '' : $aUsuarioLogueado['descUsuario']) ?>"/>
             <?php (isset($aErrores['descUsuario'])) ? print '<p style="color: red; display: inline;">' . $aErrores['descUsuario'] . '</p>' : ''; ?>
         </div>
         <div class="formElement">
             <label for="numAccesos">Numero de accesos:</label>
-            <input class="bloqueado" type="text" id="numAccesos" name="numAccesos" value="<?php echo $oUsuario->getNumAccesos() ?>" disabled />
+            <input class="bloqueado" type="text" id="numAccesos" name="numAccesos" value="<?php echo $aUsuarioLogueado['numAccesos'] ?>" disabled />
         </div>  
         <div class="formElement">
             <label for="fechaHoraUltimaConexionAnterior">Fecha de la ultima conexion:</label>
@@ -24,7 +24,7 @@
         </div> 
         <div class="formElement">
             <label for="perfil">perfil:</label>
-            <input class="bloqueado" type="text" id="perfil" name="perfil" value="<?php echo $oUsuario->getperfil() ?>" disabled />
+            <input class="bloqueado" type="text" id="perfil" name="perfil" value="<?php echo $aUsuarioLogueado['perfil'] ?>" disabled />
         </div>  
         <div class="formElement">
             <input type="submit" value="Editar perfil" name="editarPerfil" />

@@ -29,6 +29,15 @@ if (isset($_REQUEST['borrarCuenta'])) {
 }
 
 $oUsuario = $_SESSION['usuarioMiAplicacion'];
+$aUsuarioLogueado = [
+    'codUsuario' => $oUsuario->getCodUsuario(),
+    'password' => $oUsuario->getPassword(),
+    'descUsuario' => $oUsuario->getDescUsuario(),
+    'numAccesos' => $oUsuario->getNumAccesos(),
+    'fechaHoraUltimaConexion' => $oUsuario->getFechaHoraUltimaConexion(),
+    'fechaHoraUltimaConexionAnterior' => $oUsuario->getFechaHoraUltimaConexionAnterior(),
+    'perfil' => $oUsuario->getPerfil()
+    ];
 $fechaFormateada = new DateTime($oUsuario->getFechaHoraUltimaConexionAnterior());
 $fechaFormateada = $fechaFormateada->format("d-m-Y H:i:s");
 

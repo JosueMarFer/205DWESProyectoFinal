@@ -31,8 +31,13 @@
                 <a href="https://github.com/JosueMarFer/205DWESProyectoFinal" target="_blank"><img
                         src="./webroot/images/github.png" alt="Imagen github"></a>
             </div>
+            <div class="tecnologias">
+                <form name="LoginLogoffTecnologias" method="post">
+                <input type="submit" value="tecnologias" name="tecnologias" />
+                </form>
+            </div>
             <div class="home">
-                <a href="../../index.html"><img src="./webroot/images/home.png" alt="Imagen home"></a>
+                <a href="../../index.html"><img src="./webroot/images/home.png" alt="Imagen home" target="_blank"></a>
                 <p>Josué martínez Fernández</p>
             </div>
             <div class="paginaImitada">

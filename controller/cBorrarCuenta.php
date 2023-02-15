@@ -17,7 +17,15 @@ if (isset($_REQUEST['volver'])) {
 }
 
 $oUsuario = $_SESSION['usuarioMiAplicacion'];
-
+$aUsuarioLogueado = [
+    'codUsuario' => $oUsuario->getCodUsuario(),
+    'password' => $oUsuario->getPassword(),
+    'descUsuario' => $oUsuario->getDescUsuario(),
+    'numAccesos' => $oUsuario->getNumAccesos(),
+    'fechaHoraUltimaConexion' => $oUsuario->getFechaHoraUltimaConexion(),
+    'fechaHoraUltimaConexionAnterior' => $oUsuario->getFechaHoraUltimaConexionAnterior(),
+    'perfil' => $oUsuario->getPerfil()
+    ];
 //Define e inicializa el array de errores
 $aErrores = [
     'contraseñaActual' => '',
