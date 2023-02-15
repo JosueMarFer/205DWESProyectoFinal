@@ -25,7 +25,8 @@ $aControladores = [
     'miCuenta' => './controller/cMiCuenta.php',
     'cambiarPassword' => './controller/cCambiarPassword.php',
     'borrarCuenta' => './controller/cBorrarCuenta.php',
-    'mtoDepartamentos' => './controller/cMtoDepartamentos.php'
+    'mtoDepartamentos' => './controller/cMtoDepartamentos.php',
+    'tecnologias' => './controller/cTecnologias.php'
 ];
 
 $aVistas = [
@@ -41,5 +42,6 @@ $aVistas = [
     'miCuenta' => './view/vMiCuenta.php',
     'cambiarPassword' => './view/vCambiarPassword.php',
     'borrarCuenta' => './view/vBorrarCuenta.php',
-    'mtoDepartamentos' => './view/vMtoDepartamentos.php'
+    'mtoDepartamentos' => './view/vMtoDepartamentos.php',
+    'tecnologias' => './view/vTecnologias.php'
 ];

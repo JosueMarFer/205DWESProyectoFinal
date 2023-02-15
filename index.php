@@ -1,4 +1,5 @@
 <?php
+
 //@author Josue Martinez Fernandez
 //@version 1.0
 //ultima actualizacion 12/01/2023
@@ -9,6 +10,15 @@ session_start(); //Inicia la sesión
 
 if (!isset($_SESSION['paginaEnCurso'])) {
     $_SESSION['paginaEnCurso'] = 'inicioPublico';
+}
+
+if ($_SESSION['paginaEnCurso'] != 'tecnologias') {
+    if (isset($_REQUEST['tecnologias'])) {
+        $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
+        $_SESSION['paginaEnCurso'] = 'tecnologias';
+        header('Location: ./index.php');
+        exit();
+    }
 }
 
 require_once $aControladores[$_SESSION['paginaEnCurso']];

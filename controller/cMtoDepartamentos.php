@@ -16,6 +16,9 @@ if (isset($_REQUEST['volver'])) {
     header('Location: ./index.php');
     exit();
 }
+if (!isset($_SESSION['criterioBusquedaDepartamentos'])) {
+    $_SESSION['criterioBusquedaDepartamentos']['descripcionBuscada'] = '';
+}
 //Define e inicializa el array de errores
 $aErrores = [
     'descDepartamento' => ''
@@ -35,15 +38,23 @@ if (isset($_REQUEST['buscarDepartamentos'])) {
     }
 //Si la entrada es correcta...
     if ($entradaOK) {
-//Crea el usuario en la BBDD y lo instancia
-        $oResultado = DepartamentoPDO::buscaDepartamentosPorDesc($_REQUEST['descDepartamento']);
-        $aResultados = [];
-        for ($index = 0; $index < $oResultado->rowCount(); $index++) {
-            $oDepartamento = $oResultado->fetchObject();
-            $oDepartamentoInstanciado= new Departamento($oDepartamento->T02_CodDepartamento, $oDepartamento->T02_DescDepartamento, $oDepartamento->T02_FechaCreacionDepartamento, $oDepartamento->T02_VolumenNegocio, ($oDepartamento->T02_FechaBajaDepartamento ?? null));
-            array_push($aResultados, $oDepartamentoInstanciado);
-        }
+        $_SESSION['criterioBusquedaDepartamentos']['descripcionBuscada'] = $_REQUEST['descDepartamento'];
     }
+}
+//Crea el usuario en la BBDD y lo instancia
+$oResultado = DepartamentoPDO::buscaDepartamentosPorDesc($_SESSION['criterioBusquedaDepartamentos']['descripcionBuscada']);
+$aResultados = [];
+for ($index = 0; $index < $oResultado->rowCount(); $index++) {
+    $oDepartamento = $oResultado->fetchObject();
+    $oDepartamentoInstanciado = new Departamento($oDepartamento->T02_CodDepartamento, $oDepartamento->T02_DescDepartamento, $oDepartamento->T02_FechaCreacionDepartamento, $oDepartamento->T02_VolumenNegocio, ($oDepartamento->T02_FechaBajaDepartamento ?? null));
+    $aDepartamentoInstanciado = [
+        'codDepartamento' => $oDepartamentoInstanciado->getCodDepartamento(),
+        'descDepartamento' => $oDepartamentoInstanciado->getDescDepartamento(),
+        'fechaCreacionDepartamento' => $oDepartamentoInstanciado->getFechaCreacionDepartamento(),
+        'volumenDeNegocio' => $oDepartamentoInstanciado->getVolumenDeNegocio(),
+        'fechaBajaDepartamento' => $oDepartamentoInstanciado->getFechaBajaDepartamento()
+    ];
+    array_push($aResultados, $aDepartamentoInstanciado);
 }
 require_once $aVistas['layout'];
 ?>

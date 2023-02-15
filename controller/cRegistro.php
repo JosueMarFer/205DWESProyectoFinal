@@ -4,7 +4,7 @@
 //@version 1.0
 //ultima actualizacion 12/01/2023    
 //Si se ha pulsado el boton de cancelar vuelve al login
-if (isset($_REQUEST['volver'])) {
+if (isset($_REQUEST['cancelar'])) {
     $_SESSION['paginaEnCurso'] = 'login';
     header('Location: ./index.php');
     exit();

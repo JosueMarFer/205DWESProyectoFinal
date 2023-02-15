@@ -21,8 +21,8 @@ $oUsuario = $_SESSION['usuarioMiAplicacion'];
 //Define e inicializa el array de errores
 $aErrores = [
     'nuevaContraseña' => '',
-    'contraseñaActual' => '',
-    'repetirContraseñaActual' => ''
+    'repetirNuevaContraseña' => '',
+    'contraseñaActual' => ''
 ];
 //Define e inicializa la variable encargada de comprobar si los datos estan validados
 $entradaOK = true;
@@ -30,8 +30,8 @@ $entradaOK = true;
 //en caso de devolver algun error almacena el mismo en el array de errores (en su campo correspondiente)
 if (isset($_REQUEST['cambiarPassword'])) {
     $aErrores['nuevaContraseña'] = validacionFormularios::validarPassword($_REQUEST['nuevaContraseña'], 8, 4, 1, 1);
+    $aErrores['repetirNuevaContraseña'] = validacionFormularios::validarPassword($_REQUEST['repetirNuevaContraseña'], 8, 4, 1, 1);
     $aErrores['contraseñaActual'] = validacionFormularios::validarPassword($_REQUEST['contraseñaActual'], 8, 4, 1, 1);
-    $aErrores['repetirContraseñaActual'] = validacionFormularios::validarPassword($_REQUEST['repetirContraseñaActual'], 8, 4, 1, 1);
 //Recorre el array de errores y en caso de tener alguno la variable que comprueba la entrada pasa a ser false
     foreach ($aErrores as $errorIndex => $errorValue) {
         if (isset($errorValue)) {
@@ -40,12 +40,12 @@ if (isset($_REQUEST['cambiarPassword'])) {
         }
     }
     if ($entradaOK) {
-        if ($_REQUEST['contraseñaActual'] != $_REQUEST['repetirContraseñaActual']) {
-            $aErrores['repetirContraseñaActual'] = 'Las contraseñas no coinciden';
+        if ($_REQUEST['nuevaContraseña'] != $_REQUEST['repetirNuevaContraseña']) {
+            $aErrores['repetirNuevaContraseña'] = 'Las contraseñas no coinciden';
             $entradaOK = false;
         }
-        if ($_REQUEST['contraseñaActual'] == $_REQUEST['nuevaContraseña']) {
-            $aErrores['nuevaContraseña'] = 'La nueva contraseña no debe coincidir con la actual';
+        if ($_REQUEST['contraseñaActual'] == $_REQUEST['repetirNuevaContraseña']) {
+            $aErrores['repetirNuevaContraseña'] = 'La nueva contraseña no debe coincidir con la actual';
             $entradaOK = false;
         }
     }

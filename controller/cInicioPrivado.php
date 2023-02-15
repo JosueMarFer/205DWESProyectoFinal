@@ -11,6 +11,15 @@ if (!isset($_SESSION['usuarioMiAplicacion']) || is_null($_SESSION['usuarioMiApli
 }
 //Carga el usuario almacenado en la sesion en un objeto
 $oUsuario = $_SESSION['usuarioMiAplicacion'];
+$aUsuarioLogueado = [
+    'codUsuario' => $oUsuario->getCodUsuario(),
+    'password' => $oUsuario->getPassword(),
+    'descUsuario' => $oUsuario->getDescUsuario(),
+    'numAccesos' => $oUsuario->getNumAccesos(),
+    'fechaHoraUltimaConexion' => $oUsuario->getFechaHoraUltimaConexion(),
+    'fechaHoraUltimaConexionAnterior' => $oUsuario->getFechaHoraUltimaConexionAnterior(),
+    'perfil' => $oUsuario->getPerfil()
+    ];
 $fechaFormateada = new DateTime($oUsuario->getFechaHoraUltimaConexionAnterior());
 $fechaFormateada = $fechaFormateada->format("d-m-Y H:i:s");
 //Si se pulsa salir se destruye la sesion y se redirige a inicio publico

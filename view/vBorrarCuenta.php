@@ -19,6 +19,11 @@
         <div class="formElement">
             <input type="submit" value="Borrar cuenta" name="borrarCuenta" />
         </div>
+        <div class="confirmacion">
+            <?php
+            echo '<h3>¿Esta seguro de que desea eliminar el usuario actual?</h3><h3>Usuario actual: ' . $aUsuarioLogueado['codUsuario'] . '</h3>';
+            ?>
+        <div>
     </fieldset>
     <div class="formElement">
         <input type="submit" value="Volver" name="volver" />
