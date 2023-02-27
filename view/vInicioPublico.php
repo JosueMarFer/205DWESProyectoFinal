@@ -1,7 +1,12 @@
 <?php
-//@author Josue Martinez Fernandez
-//@version 1.0
-//ultima actualizacion 12/01/2023
+/** 
+ * Vista Inicio Publico
+ * 
+ * Vista Inicio Publico
+ * 
+ * @author Josue Martinez Fernandez
+ * @version 1.0
+ */
 ?>
 <form name="LoginLogoffInicioPublico" method="post">
   <div class="formElement">

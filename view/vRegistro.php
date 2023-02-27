@@ -1,7 +1,13 @@
 <?php
-//@author Josue Martinez Fernandez
-//@version 1.0
-//ultima actualizacion 12/01/2023
+/** 
+ * 
+ * Vista Registro
+ * 
+ * Vista Registro
+ * 
+ * @author Josue Martinez Fernandez
+ * @version 1.0
+ */
 ?>
 <form name="ProyectoLoginLogoffTema5Registro" method="post">
   <fieldset>

@@ -245,6 +245,19 @@ input[type="submit"]:hover {
     filter: drop-shadow(0rem 0rem 0.2rem white);
 }
 
+button {
+    display: inline-block;
+    color: white;
+    margin: 0.5rem;
+    border: 1px solid white;
+    border-radius: 5%;
+    background-color: #0A0A23;
+    padding: 0.5rem;
+}
+button:hover {
+    filter: drop-shadow(0rem 0rem 0.2rem white);
+}
+
 .tecnologias {
     grid-column: 3/4;
     justify-self: center;

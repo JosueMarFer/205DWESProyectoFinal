@@ -1,7 +1,4 @@
 <?php
-//@author Josue Martinez Fernandez
-//@version 1.0
-//ultima actualizacion 12/01/2023
 //Conexion Servidor Desarrollo Casa
 //const HOST = '192.168.3.212';
 //const HOSTPDO = 'mysql:host=192.168.3.212; dbname=DB205DWESProyectoFinal';
