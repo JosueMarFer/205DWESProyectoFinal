@@ -1,9 +1,13 @@
 <?php
 
-//@author Josue Martinez Fernandez
-//@version 1.0
-//ultima actualizacion 12/01/2023    
-//Si se ha pulsado el boton de login redirige al login
+/**
+ * Controlador Inicio Publico
+ * 
+ * Controlador Inicio Publico
+ * 
+ *  @author Josue Martinez Fernandez
+ * @version 1.0
+ */
 if (isset($_REQUEST['login'])) {
   $_SESSION['paginaEnCurso'] = 'login';
   header('Location: ./index.php');

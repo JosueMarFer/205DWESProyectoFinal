@@ -1,21 +1,32 @@
 <?php
 
-//@author Josue Martinez Fernandez
-//@version 1.0
-//ultima actualizacion 12/01/2023  
+/** 
+ * Clase consultas SQL PDO
+ * 
+ * Clase para la ejecucion de consultas SQL con PDO
+ * 
+ * @author Josue Martinez Fernandez
+ * @version 1.0
+ */
+
 class DBPDO implements DB {
 
-//Funcion que ejecuta una sentencia SQL
+  /** 
+   * Funcion consultas SQL
+   * 
+   * Funcion para ejecutar consultas SQL
+   * 
+   * @param String $sentenciaSQL Codigo SQL a ejecutar.
+   * @param Array $parametros Parametros opcionales, pueden ser nulos.
+   * @return Object
+   */
   public static function ejecutarConsulta($sentenciaSQL, $parametros = null) {
     try {
-//Conexion con la BBDD
       $miDB = new PDO(HOSTPDO, USER, PASSWD);
-//Preparar y ejecutar la consulta
       $oResultado = $miDB->prepare($sentenciaSQL);
       $oResultado->execute($parametros);
       return $oResultado;
     } catch (Exception $e) {
-//Si sucede un error instancia un objeto y lo almacena en la sesion         
       $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
       $_SESSION['paginaEnCurso'] = 'error';
       $_SESSION['error'] = new ERRORApp($e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine(), $_SESSION['paginaAnterior']);

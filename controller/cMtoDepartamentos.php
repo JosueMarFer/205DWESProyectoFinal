@@ -1,60 +1,67 @@
 <?php
 
-//@author Josue Martinez Fernandez
-//@version 1.0
-//ultima actualizacion 12/01/2023    
-//Almacena en un array los atributos del objeto de error almacenado en la sesion.
-////Si la sesion no tiene almcenado un usuario redirige al login
+/**
+ * Controlador Mantenimiento de Departamentos
+ * 
+ * Controlador Mantenimiento de Departamentos
+ * 
+ * @author Josue Martinez Fernandez
+ * @version 1.0
+ */
 if (!isset($_SESSION['usuarioMiAplicacion']) || is_null($_SESSION['usuarioMiAplicacion'])) {
-    $_SESSION['paginaEnCurso'] = 'inicioPublico';
-    header('Location: ./index.php');
-    exit();
+  $_SESSION['paginaEnCurso'] = 'inicioPublico';
+  header('Location: ./index.php');
+  exit();
 }
-//Si se pulsa el boton de volver vuelve a inicio privado
 if (isset($_REQUEST['volver'])) {
-    $_SESSION['paginaEnCurso'] = 'inicioPrivado';
-    header('Location: ./index.php');
-    exit();
+  $_SESSION['paginaEnCurso'] = 'inicioPrivado';
+  header('Location: ./index.php');
+  exit();
 }
 if (!isset($_SESSION['criterioBusquedaDepartamentos'])) {
-    $_SESSION['criterioBusquedaDepartamentos']['descripcionBuscada'] = '';
+  $_SESSION['criterioBusquedaDepartamentos']['descripcionBuscada'] = '';
 }
-//Define e inicializa el array de errores
 $aErrores = [
     'descDepartamento' => ''
 ];
-//Define e inicializa la variable encargada de comprobar si los datos estan validados
 $entradaOK = true;
-//Si se ha pulsado el boton de registro valida los campos
-//en caso de devolver algun error almacena el mismo en el array de errores (en su campo correspondiente)
 if (isset($_REQUEST['buscarDepartamentos'])) {
-    $aErrores['descDepartamento'] = validacionFormularios::comprobarAlfabetico($_REQUEST['descDepartamento'], 255, 1, 0);
-//Recorre el array de errores y en caso de tener alguno la variable que comprueba la entrada pasa a ser false
-    foreach ($aErrores as $errorIndex => $errorValue) {
-        if (isset($errorValue)) {
-            $entradaOK = false;
-            $_REQUEST[$errorIndex] = null;
-        }
+  $aErrores['descDepartamento'] = validacionFormularios::comprobarAlfabetico($_REQUEST['descDepartamento'], 255, 1, 0);
+  foreach ($aErrores as $errorIndex => $errorValue) {
+    if (isset($errorValue)) {
+      $entradaOK = false;
+      $_REQUEST[$errorIndex] = null;
     }
-//Si la entrada es correcta...
-    if ($entradaOK) {
-        $_SESSION['criterioBusquedaDepartamentos']['descripcionBuscada'] = $_REQUEST['descDepartamento'];
-    }
+  }
+  if ($entradaOK) {
+    $_SESSION['criterioBusquedaDepartamentos']['descripcionBuscada'] = $_REQUEST['descDepartamento'];
+  }
 }
-//Crea el usuario en la BBDD y lo instancia
 $oResultado = DepartamentoPDO::buscaDepartamentosPorDesc($_SESSION['criterioBusquedaDepartamentos']['descripcionBuscada']);
 $aResultados = [];
 for ($index = 0; $index < $oResultado->rowCount(); $index++) {
-    $oDepartamento = $oResultado->fetchObject();
-    $oDepartamentoInstanciado = new Departamento($oDepartamento->T02_CodDepartamento, $oDepartamento->T02_DescDepartamento, $oDepartamento->T02_FechaCreacionDepartamento, $oDepartamento->T02_VolumenNegocio, ($oDepartamento->T02_FechaBajaDepartamento ?? null));
-    $aDepartamentoInstanciado = [
-        'codDepartamento' => $oDepartamentoInstanciado->getCodDepartamento(),
-        'descDepartamento' => $oDepartamentoInstanciado->getDescDepartamento(),
-        'fechaCreacionDepartamento' => $oDepartamentoInstanciado->getFechaCreacionDepartamento(),
-        'volumenDeNegocio' => $oDepartamentoInstanciado->getVolumenDeNegocio(),
-        'fechaBajaDepartamento' => $oDepartamentoInstanciado->getFechaBajaDepartamento()
-    ];
-    array_push($aResultados, $aDepartamentoInstanciado);
+  $oDepartamento = $oResultado->fetchObject();
+  $oDepartamentoInstanciado = new Departamento($oDepartamento->T02_CodDepartamento, $oDepartamento->T02_DescDepartamento, $oDepartamento->T02_FechaCreacionDepartamento, $oDepartamento->T02_VolumenNegocio, ($oDepartamento->T02_FechaBajaDepartamento ?? null));
+  $FechaCreacionDepartamentoFormateada = new DateTime($oDepartamentoInstanciado->getFechaCreacionDepartamento());
+  $FechaCreacionDepartamentoFormateada = $FechaCreacionDepartamentoFormateada->format("d-m-Y H:i:s");
+  if (!is_null($oDepartamentoInstanciado->getFechaBajaDepartamento())) {
+    $fechaBajaFormateada = new DateTime($oDepartamentoInstanciado->getFechaBajaDepartamento());
+    $fechaBajaFormateada = $fechaBajaFormateada->format("d-m-Y H:i:s");
+  } else {
+    $fechaBajaFormateada = '';
+  }
+  $aDepartamentoInstanciado = [
+      'codDepartamento' => $oDepartamentoInstanciado->getCodDepartamento(),
+      'descDepartamento' => $oDepartamentoInstanciado->getDescDepartamento(),
+      'fechaCreacionDepartamento' => $FechaCreacionDepartamentoFormateada,
+      'volumenDeNegocio' => $oDepartamentoInstanciado->getVolumenDeNegocio(),
+      'fechaBajaDepartamento' => $fechaBajaFormateada,
+      'editar' => '',
+      'Borrar' => '',
+      'Baja' => '',
+      'Alta' => ''
+  ];
+  array_push($aResultados, $aDepartamentoInstanciado);
 }
 require_once $aVistas['layout'];
 ?>

@@ -1,118 +1,159 @@
 <?php
 
-//@author Josue Martinez Fernandez
-//@version 1.0
-//ultima actualizacion 12/01/2023  
+/** 
+ * Clase UsuarioPDO
+ * 
+ * Clase utilizada para las operaciones con los usuarios.
+ * 
+ * @author Josue Martinez Fernandez
+ * @version 1.0
+ */
+
 class UsuarioPDO implements UsuarioDB {
 
-//Funcion utilizada para comprobar si un usuario existe en la BBDD y si la contraseña es correcta
-    public static function validarUsuario($codUsuario, $password) {
-        //Definicion de la sentencia SQL, previo cifrado de la password
-        $passwordCifrada = (hash('sha256', ($codUsuario . $password)));
-        $sqlValidarUsuario = "SELECT * FROM T01_Usuario WHERE T01_CodUsuario ='{$codUsuario}' AND T01_Password ='{$passwordCifrada}';";
-//Ejecucion de la sentencia usando la clase DBPDO
-        $oResultado = DBPDO::ejecutarConsulta($sqlValidarUsuario);
-        $usuarioResultado = $oResultado->fetchObject();
-//Si el usuario existe devuelve un objeto usuario, si no retorna un null;
-        if ($usuarioResultado) {
-            return new Usuario($usuarioResultado->T01_CodUsuario, $usuarioResultado->T01_Password, $usuarioResultado->T01_DescUsuario, $usuarioResultado->T01_NumConexiones, $usuarioResultado->T01_FechaHoraUltimaConexion, null, $usuarioResultado->T01_Perfil);
-        } else {
-            return null;
-        }
+  /**
+   * valida usuario.
+   * 
+   * valida si un usuario esta en la BD y si la contraseña introducida corresponde al mismo.
+   * 
+   * @param String $codUsuario
+   * @param String $password
+   * @return Usuario null
+   */
+  public static function validarUsuario($codUsuario, $password) {
+    //Definicion de la sentencia SQL, previo cifrado de la password
+    $passwordCifrada = (hash('sha256', ($codUsuario . $password)));
+    $sqlValidarUsuario = "SELECT * FROM T01_Usuario WHERE T01_CodUsuario ='{$codUsuario}' AND T01_Password ='{$passwordCifrada}';";
+    $oResultado = DBPDO::ejecutarConsulta($sqlValidarUsuario);
+    $usuarioResultado = $oResultado->fetchObject();
+    if ($usuarioResultado) {
+      return new Usuario($usuarioResultado->T01_CodUsuario, $usuarioResultado->T01_Password, $usuarioResultado->T01_DescUsuario, $usuarioResultado->T01_NumConexiones, $usuarioResultado->T01_FechaHoraUltimaConexion, null, $usuarioResultado->T01_Perfil);
+    } else {
+      return null;
     }
+  }
 
-    public static function registrarUltimaConexion($oUsuario) {
-// Actualiza el numero de conexiones del objeto usuario y la ultima conexion anterior por la ultima conexion        
-        $oUsuario->setfechaHoraUltimaConexionAnterior($oUsuario->getfechaHoraUltimaConexion());
-        $oUsuario->setFechaHoraUltimaConexion(new DateTime());
-        $oUsuario->setNumAccesos($oUsuario->getNumAccesos() + 1);
-        $fechaHoraSQL = $oUsuario->getFechaHoraUltimaConexion();
-        $fechaHoraSQLString = $fechaHoraSQL->format("Y-m-d H:i:s");
-//Definicion de la sentencia SQL
-        $sqlActualizarConexiones = "UPDATE T01_Usuario SET T01_NumConexiones = '{$oUsuario->getNumAccesos()}', T01_FechaHoraUltimaConexion = '{$fechaHoraSQLString}' WHERE T01_CodUsuario = '{$oUsuario->getCodUsuario()}';";
-//Ejecucion de la sentencia usando la clase DBPDO       
-        $actualizado = DBPDO::ejecutarConsulta($sqlActualizarConexiones);
-// Devuelve el objeto usuario si no se ha actualizado devuelve un null
-        if ($actualizado) {
-            return $oUsuario;
-        } else {
-            return null;
-        }
+  /**
+   * Registra la ultima conexion.
+   * 
+   * Registra la ultima conexion, actualiza el objeto usuario y el registro en la BD.
+   * 
+   * @param String $oUsuario
+   * @return Usuario null
+   */
+  public static function registrarUltimaConexion($oUsuario) {
+    $oUsuario->setfechaHoraUltimaConexionAnterior($oUsuario->getfechaHoraUltimaConexion());
+    $oUsuario->setFechaHoraUltimaConexion(new DateTime());
+    $oUsuario->setNumAccesos($oUsuario->getNumAccesos() + 1);
+    $fechaHoraSQL = $oUsuario->getFechaHoraUltimaConexion();
+    $fechaHoraSQLString = $fechaHoraSQL->format("Y-m-d H:i:s");
+    $sqlActualizarConexiones = "UPDATE T01_Usuario SET T01_NumConexiones = '{$oUsuario->getNumAccesos()}', T01_FechaHoraUltimaConexion = '{$fechaHoraSQLString}' WHERE T01_CodUsuario = '{$oUsuario->getCodUsuario()}';";
+    $actualizado = DBPDO::ejecutarConsulta($sqlActualizarConexiones);
+    if ($actualizado) {
+      return $oUsuario;
+    } else {
+      return null;
     }
+  }
 
-    public static function altaUsuario($codUsuario, $password, $descripcionUsuario) {
-//Definicion de la sentencia SQL, previo cifrado de la password
-        $passwordCifrada = (hash('sha256', ($codUsuario . $password)));
-        $sqlAltaUsuario = "INSERT INTO T01_Usuario VALUES ('{$codUsuario}', '{$passwordCifrada}', '{$descripcionUsuario}', 0, NOW(), 'usuario', null);";
-//Ejecucion de la sentencia usando la clase DBPDO       
-        $ingresado = DBPDO::ejecutarConsulta($sqlAltaUsuario);
-// Devuelve el objeto usuario en caso de haber ingresado, si no devuelve false; 
-        if ($ingresado) {
-            $oUsuario = UsuarioPDO::validarUsuario($codUsuario, $password);
-            return $oUsuario;
-        } else {
-            return null;
-        }
+  /**
+   * Alta de un usuario.
+   * 
+   * Da de alta a un usuario añadiendo el registro a la BD.
+   * 
+   * @param String $codUsuario
+   * @param String $password
+   * @param String $descripcionUsuario
+   * @return Usuario null
+   */
+  public static function altaUsuario($codUsuario, $password, $descripcionUsuario) {
+    $passwordCifrada = (hash('sha256', ($codUsuario . $password)));
+    $sqlAltaUsuario = "INSERT INTO T01_Usuario VALUES ('{$codUsuario}', '{$passwordCifrada}', '{$descripcionUsuario}', 0, NOW(), 'usuario', null);";
+    $ingresado = DBPDO::ejecutarConsulta($sqlAltaUsuario);
+    if ($ingresado) {
+      $oUsuario = UsuarioPDO::validarUsuario($codUsuario, $password);
+      return $oUsuario;
+    } else {
+      return null;
     }
+  }
 
-//Funcion utilizada para comprobar si un usuario existe en la BBDD
-    public static function validarCodNoExiste($codUsuario) {
-        //Definicion de la sentencia SQL
-        $sqlValidarCodNoExiste = "SELECT * FROM T01_Usuario WHERE T01_CodUsuario ='{$codUsuario}';";
-//Ejecucion de la sentencia usando la clase DBPDO
-        $oResultado = DBPDO::ejecutarConsulta($sqlValidarCodNoExiste);
-        $usuarioResultado = $oResultado->fetchObject();
-//Si el usuario existe devuelve un true, si no retorna un false;
-        if ($usuarioResultado) {
-            return true;
-        } else {
-            return false;
-        }
+  /**
+   * Valida si un codigo existe.
+   * 
+   * Valida si un codigo existe como registro en la BD.
+   * 
+   * @param String $codUsuario
+   * @return Bolean 
+   */
+  public static function validarCodNoExiste($codUsuario) {
+    $sqlValidarCodNoExiste = "SELECT * FROM T01_Usuario WHERE T01_CodUsuario ='{$codUsuario}';";
+    $oResultado = DBPDO::ejecutarConsulta($sqlValidarCodNoExiste);
+    $usuarioResultado = $oResultado->fetchObject();
+    if ($usuarioResultado) {
+      return true;
+    } else {
+      return false;
     }
+  }
 
-//Funcion utilizada para modificar la descripcion de un usuario
-    public static function modificarUsuario($descUsuario, $oUsuario) {
-        //Definicion de la sentencia SQL
-        $sqlModificarUsuario = "UPDATE T01_Usuario SET T01_DescUsuario = '{$descUsuario}' WHERE T01_CodUsuario = '{$oUsuario->getCodUsuario()}';";
-//Ejecucion de la sentencia usando la clase DBPDO
-        $modificado = DBPDO::ejecutarConsulta($sqlModificarUsuario);
-//Si el usuario existe devuelve un objeto usuario, si no retorna un null;
-        if ($modificado) {
-            $oUsuario->setDescUsuario($descUsuario);
-            return $oUsuario;
-        } else {
-            return null;
-        }
+  /**
+   * Modifica un usuario.
+   * 
+   * Modifica la descripcion del usuario.
+   * 
+   * @param String $descUsuario
+   * @param Usuario $oUsuario
+   * @return Usuario null
+   */
+  public static function modificarUsuario($descUsuario, $oUsuario) {
+    $sqlModificarUsuario = "UPDATE T01_Usuario SET T01_DescUsuario = '{$descUsuario}' WHERE T01_CodUsuario = '{$oUsuario->getCodUsuario()}';";
+    $modificado = DBPDO::ejecutarConsulta($sqlModificarUsuario);
+    if ($modificado) {
+      $oUsuario->setDescUsuario($descUsuario);
+      return $oUsuario;
+    } else {
+      return null;
     }
-    
-//Funcion utilizada para borrar un usuario
-    public static function borrarrUsuario($oUsuario) {
-//Definicion de la sentencia SQL
-        $sqlModificarUsuario = "DELETE FROM T01_Usuario WHERE T01_CodUsuario = '{$oUsuario->getCodUsuario()}';";
-//Ejecucion de la sentencia usando la clase DBPDO
-        $borrado = DBPDO::ejecutarConsulta($sqlModificarUsuario);
-//Si el usuario es eliminado devuelve un objeto true, si no retorna un false;
-        if ($borrado) {
-            return true;
-        } else {
-            return false;
-        }
+  }
+
+  /**
+   * Borra el usuario.
+   * 
+   * Borra el usuario de la BD.
+   * 
+   * @param Usuario $oUsuario
+   * @return Boolean
+   */
+  public static function borrarrUsuario($oUsuario) {
+    $sqlModificarUsuario = "DELETE FROM T01_Usuario WHERE T01_CodUsuario = '{$oUsuario->getCodUsuario()}';";
+    $borrado = DBPDO::ejecutarConsulta($sqlModificarUsuario);
+    if ($borrado) {
+      return true;
+    } else {
+      return false;
     }
-    
-//Funcion utilizada para cambiar la contraseña
-    public static function cambiarPassword($oUsuario, $nuevaPassword) {
-//Definicion de la sentencia SQL
-        $sqlModificarUsuario = "UPDATE T01_Usuario SET T01_PAssword = '{$nuevaPassword}' WHERE T01_CodUsuario = '{$oUsuario->getCodUsuario()}';";
-//Ejecucion de la sentencia usando la clase DBPDO
-        $modificado = DBPDO::ejecutarConsulta($sqlModificarUsuario);
-//Si el usuario existe devuelve un objeto usuario, si no retorna un null;
-        if ($modificado) {
-            $oUsuario->setPassword($nuevaPassword);
-            return $oUsuario;
-        } else {
-            return null;
-        }
+  }
+
+  /**
+   * cambia la password del usuario.
+   * 
+   * cambia la password del usuario tanto para el objeto como en la BD.
+   * 
+   * @param Usuario $oUsuario
+   * @param String $nuevaPassword
+   * @return Usuario null
+   */
+  public static function cambiarPassword($oUsuario, $nuevaPassword) {
+    $sqlModificarUsuario = "UPDATE T01_Usuario SET T01_PAssword = '{$nuevaPassword}' WHERE T01_CodUsuario = '{$oUsuario->getCodUsuario()}';";
+    $modificado = DBPDO::ejecutarConsulta($sqlModificarUsuario);
+    if ($modificado) {
+      $oUsuario->setPassword($nuevaPassword);
+      return $oUsuario;
+    } else {
+      return null;
     }
+  }
 
 }
 
