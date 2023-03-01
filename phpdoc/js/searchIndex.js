@@ -216,15 +216,50 @@ Search.appendIndex(
             "summary": "Clase\u0020DepartamentoPDO",
             "url": "classes/DepartamentoPDO.html"
         },                {
-            "fqsen": "\\DepartamentoPDO\u003A\u003AbuscaDepartamentosPorDesc\u0028\u0029",
-            "name": "buscaDepartamentosPorDesc",
+            "fqsen": "\\DepartamentoPDO\u003A\u003AbuscaDepartamentoPorDesc\u0028\u0029",
+            "name": "buscaDepartamentoPorDesc",
             "summary": "Busca\u0020departamentos\u0020por\u0020descripcion.",
-            "url": "classes/DepartamentoPDO.html#method_buscaDepartamentosPorDesc"
+            "url": "classes/DepartamentoPDO.html#method_buscaDepartamentoPorDesc"
         },                {
-            "fqsen": "\\DepartamentoPDO\u003A\u003AbuscaDepartamentosPorCod\u0028\u0029",
-            "name": "buscaDepartamentosPorCod",
+            "fqsen": "\\DepartamentoPDO\u003A\u003AcantidadDepartamentoPorDesc\u0028\u0029",
+            "name": "cantidadDepartamentoPorDesc",
+            "summary": "Cantidad\u0020de\u0020departamentos\u0020por\u0020descripcion.",
+            "url": "classes/DepartamentoPDO.html#method_cantidadDepartamentoPorDesc"
+        },                {
+            "fqsen": "\\DepartamentoPDO\u003A\u003AbuscaDepartamentoPorCod\u0028\u0029",
+            "name": "buscaDepartamentoPorCod",
             "summary": "Busca\u0020departamentos\u0020por\u0020su\u0020codigo.",
-            "url": "classes/DepartamentoPDO.html#method_buscaDepartamentosPorCod"
+            "url": "classes/DepartamentoPDO.html#method_buscaDepartamentoPorCod"
+        },                {
+            "fqsen": "\\DepartamentoPDO\u003A\u003AvalidaCodNoExiste\u0028\u0029",
+            "name": "validaCodNoExiste",
+            "summary": "Valida\u0020si\u0020un\u0020codigo\u0020existe.",
+            "url": "classes/DepartamentoPDO.html#method_validaCodNoExiste"
+        },                {
+            "fqsen": "\\DepartamentoPDO\u003A\u003ArehabilitaDepartamento\u0028\u0029",
+            "name": "rehabilitaDepartamento",
+            "summary": "Rehabilitacion\u0020logica\u0020de\u0020un\u0020departamento.",
+            "url": "classes/DepartamentoPDO.html#method_rehabilitaDepartamento"
+        },                {
+            "fqsen": "\\DepartamentoPDO\u003A\u003AbajaLogicaDepartamento\u0028\u0029",
+            "name": "bajaLogicaDepartamento",
+            "summary": "Baja\u0020logica\u0020de\u0020un\u0020departamento.",
+            "url": "classes/DepartamentoPDO.html#method_bajaLogicaDepartamento"
+        },                {
+            "fqsen": "\\DepartamentoPDO\u003A\u003AmodificaDepartamento\u0028\u0029",
+            "name": "modificaDepartamento",
+            "summary": "Modifica\u0020un\u0020departamento.",
+            "url": "classes/DepartamentoPDO.html#method_modificaDepartamento"
+        },                {
+            "fqsen": "\\DepartamentoPDO\u003A\u003AaltaDepartamento\u0028\u0029",
+            "name": "altaDepartamento",
+            "summary": "Alta\u0020de\u0020un\u0020departamento.",
+            "url": "classes/DepartamentoPDO.html#method_altaDepartamento"
+        },                {
+            "fqsen": "\\DepartamentoPDO\u003A\u003AbajaFisicaDepartamento\u0028\u0029",
+            "name": "bajaFisicaDepartamento",
+            "summary": "Baja\u0020fisica\u0020de\u0020un\u0020departamento.",
+            "url": "classes/DepartamentoPDO.html#method_bajaFisicaDepartamento"
         },                {
             "fqsen": "\\ERRORApp",
             "name": "ERRORApp",

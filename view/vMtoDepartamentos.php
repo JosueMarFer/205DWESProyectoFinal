@@ -1,5 +1,5 @@
 <?php
-/** 
+/**
  * Vista Mantenimiento de Departamentos
  * 
  * Vista Mantenimiento de Departamentos
@@ -15,6 +15,7 @@
       <input class="opcional" type="text" id="descDepartamento" name="descDepartamento" value="<?php echo $_SESSION['criterioBusquedaDepartamentos']['descripcionBuscada'] ?? '' ?>"/>
       <?php (isset($aErrores['descDepartamento'])) ? print '<p style="color: red; display: inline;">' . $aErrores['descDepartamento'] . '</p>' : ''; ?>
       <input type="submit" value="Buscar Departamentos" name="buscarDepartamentos" />
+      <input class="crearDepartamento" type="submit" value="Crear Departamento" name="crear" />
     </div>
     <?php
     if (isset($aResultados)) {
@@ -27,12 +28,20 @@
         echo '<td>' . $aResultados[$index]['fechaCreacionDepartamento'] . '</td>';
         echo '<td>' . $aResultados[$index]['volumenDeNegocio'] . '</td>';
         echo '<td>' . $aResultados[$index]['fechaBajaDepartamento'] . '</td>';
-        echo '<td>' . '<button type="button" name="editar">Editar</button>' . '</td>';
-        echo '<td>' . '<button type="button" name="borrar">Borrar</button>' . '</td>';
-        echo '<td>' . '<button type="button" name="baja">Baja</button>' . '</td>';
-        echo '<td>' . '<button type="button" name="alta">Alta</button>' . '</td></tr>';
+        echo '<td>' . '<button type="submit" name="editar" value="' . $aResultados[$index]['codDepartamento'] . '">Editar</button>' . '</td>';
+        echo '<td>' . '<button type="submit" name="borrar" value="' . $aResultados[$index]['codDepartamento'] . '">Borrar</button>' . '</td>';
+        echo '<td>' . '<button type="submit" name="baja" value="' . $aResultados[$index]['codDepartamento'] . '"><img src="./webroot/images/downArrow.png" alt="flecha abajo"></button>' . '</td>';
+        echo '<td>' . '<button type="submit" name="alta" value="' . $aResultados[$index]['codDepartamento'] . '"><img src="./webroot/images/upArrow.png" alt="flecha arriba"></button>' . '</td></tr>';
       }
-      echo '</table>';
+      echo '<tr class="celdasVacias" ><td>';
+      if ($mostrarbotonAntes) {
+        echo '<button type="submit" name="paginaAnterior"><img src="./webroot/images/leftArrow.png" alt="flecha izquierda"></button>';
+      };
+      echo '</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>';
+      if ($mostrarbotonDespues) {
+        echo '<button type="submit" name="paginaSiguiente"><img src="./webroot/images/rightArrow.png" alt="flecha derecha"></button>';
+      };
+      echo '</td></tr></table>';
     }
     ?>
   </fieldset>

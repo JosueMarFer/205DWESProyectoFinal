@@ -26,7 +26,11 @@ $aControladores = [
     'cambiarPassword' => './controller/cCambiarPassword.php',
     'borrarCuenta' => './controller/cBorrarCuenta.php',
     'mtoDepartamentos' => './controller/cMtoDepartamentos.php',
-    'tecnologias' => './controller/cTecnologias.php'
+    'tecnologias' => './controller/cTecnologias.php',
+    'consultarEditarDepartamento' => './controller/cConsultarEditarDepartamento.php',
+    'eliminarDepartamento' => './controller/cEliminarDepartamento.php',
+    'crearDepartamento' => './controller/cAltaDepartamento.php'
+    
 ];
 
 $aVistas = [
@@ -43,5 +47,8 @@ $aVistas = [
     'cambiarPassword' => './view/vCambiarPassword.php',
     'borrarCuenta' => './view/vBorrarCuenta.php',
     'mtoDepartamentos' => './view/vMtoDepartamentos.php',
-    'tecnologias' => './view/vTecnologias.php'
+    'tecnologias' => './view/vTecnologias.php',
+    'consultarEditarDepartamento' => './view/vConsultarEditarDepartamento.php',
+    'eliminarDepartamento' => './view/vEliminarDepartamento.php',
+    'crearDepartamento' => './view/vAltaDepartamento.php'
 ];
