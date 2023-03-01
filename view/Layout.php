@@ -1,5 +1,5 @@
 <?php
-/** 
+/**
  * Layout
  * 
  * Layout
@@ -36,18 +36,21 @@
         <a href="https://github.com/JosueMarFer/205DWESProyectoFinal" target="_blank"><img
             src="./webroot/images/github.png" alt="Imagen github"></a>
       </div>
+      <div class="phpdoc">
+        <a href="./phpdoc/index.html" target="_blank"><img src="./webroot/images/phpdoc.png" alt="Imagen phpdoc"></a>
+      </div>
       <div class="tecnologias">
         <form name="LoginLogoffTecnologias" method="post">
           <input type="submit" value="tecnologias" name="tecnologias" />
         </form>
       </div>
       <div class="home">
-        <a href="../../index.html"><img src="./webroot/images/home.png" alt="Imagen home" target="_blank"></a>
+        <a href="../../index.html" target="_blank"><img src="./webroot/images/home.png" alt="Imagen home"></a>
         <p>Josué martínez Fernández</p>
       </div>
       <div class="paginaImitada">
         <p>Pagina imitada:</p>
-        <a href="https://www.freecodecamp.org/"><img src="./webroot/images/freeCodeCamp.png" alt="Imagen freeCodeCamp"></a>
+        <a href="https://www.freecodecamp.org/" target="_blank"><img src="./webroot/images/freeCodeCamp.png" alt="Imagen freeCodeCamp"></a>
       </div>
       <div class="relojJS">
       </div>

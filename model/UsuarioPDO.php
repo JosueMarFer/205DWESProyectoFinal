@@ -145,7 +145,7 @@ class UsuarioPDO implements UsuarioDB {
    * @return Usuario null
    */
   public static function cambiarPassword($oUsuario, $nuevaPassword) {
-    $sqlModificarUsuario = "UPDATE T01_Usuario SET T01_PAssword = '{$nuevaPassword}' WHERE T01_CodUsuario = '{$oUsuario->getCodUsuario()}';";
+    $sqlModificarUsuario = "UPDATE T01_Usuario SET T01_Password = '{$nuevaPassword}' WHERE T01_CodUsuario = '{$oUsuario->getCodUsuario()}';";
     $modificado = DBPDO::ejecutarConsulta($sqlModificarUsuario);
     if ($modificado) {
       $oUsuario->setPassword($nuevaPassword);
