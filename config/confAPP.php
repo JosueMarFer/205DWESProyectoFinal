@@ -12,6 +12,7 @@ require_once './model/DBPDO.php';
 require_once './model/ERRORApp.php';
 require_once './model/Departamento.php';
 require_once './model/DepartamentoPDO.php';
+require_once './model/REST.php';
 
 $aControladores = [
     'login' => './controller/cLogin.php',

@@ -321,6 +321,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/ERRORApp.html#property_paginaSiguiente"
         },                {
+            "fqsen": "\\REST",
+            "name": "REST",
+            "summary": "Clase\u0020REST",
+            "url": "classes/REST.html"
+        },                {
+            "fqsen": "\\REST\u003A\u003AdatosPokemon\u0028\u0029",
+            "name": "datosPokemon",
+            "summary": "devuelve\u0020los\u0020datos\u0020de\u0020un\u0020pokemon.",
+            "url": "classes/REST.html#method_datosPokemon"
+        },                {
             "fqsen": "\\Usuario",
             "name": "Usuario",
             "summary": "Clase\u0020Usuario",

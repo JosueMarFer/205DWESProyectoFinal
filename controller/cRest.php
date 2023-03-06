@@ -1,6 +1,6 @@
 <?php
 
-/** 
+/**
  * Controlador Rest
  * 
  * Controlador Rest
@@ -18,6 +18,24 @@ if (isset($_REQUEST['volver'])) {
   header('Location: ./index.php');
   exit();
 }
+$aPokemon = null;
+$aErrores = [
+    'nombrePokemon' => ''
+];
+$entradaOK = true;
+if (isset($_REQUEST['mostrarInformacion'])) {
+  $aErrores['nombrePokemon'] = validacionFormularios::comprobarAlfabetico($_REQUEST['nombrePokemon'], 255, 1, 1);
+  foreach ($aErrores as $errorIndex => $errorValue) {
+    if (isset($errorValue)) {
+      $entradaOK = false;
+      $_REQUEST[$errorIndex] = null;
+    }
+  }
+  if ($entradaOK) {
+    $aPokemon = REST::datosPokemon($_REQUEST['nombrePokemon']);
+  }
+}
+
 require_once $aVistas['layout'];
 ?>
 
