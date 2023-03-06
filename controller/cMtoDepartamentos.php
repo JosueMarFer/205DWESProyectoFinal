@@ -72,7 +72,12 @@ if (isset($_REQUEST['buscarDepartamentos'])) {
     $_SESSION['criterioBusquedaDepartamentos']['descripcionBuscada'] = $_REQUEST['descDepartamento'];
   }
 }
-$numDepartamentosTotal = DepartamentoPDO::cantidadDepartamentoPorDesc($_SESSION['criterioBusquedaDepartamentos']['descripcionBuscada']);
+if (isset($_REQUEST['estado'])) {
+    $_SESSION['criterioBusquedaDepartamentos']['estado'] = $_REQUEST['estado'];
+} else {
+    $_SESSION['criterioBusquedaDepartamentos']['estado'] = 0;
+}
+$numDepartamentosTotal = DepartamentoPDO::cantidadDepartamentoPorDesc($_SESSION['criterioBusquedaDepartamentos']['descripcionBuscada'], $_SESSION['criterioBusquedaDepartamentos']['estado']);
 if (isset($_REQUEST['paginaAnterior'])) {
   if ($_SESSION['numPaginaciondepartamentos'] > 0) {
     $_SESSION['numPaginaciondepartamentos'] -= 5;
@@ -91,10 +96,10 @@ if (isset($_REQUEST['paginaSiguiente'])) {
 if ($_SESSION['numPaginaciondepartamentos'] == 0) {
   $mostrarbotonAntes = false;
 }
-if ($_SESSION['numPaginaciondepartamentos']+5 > $numDepartamentosTotal) {
+if ($_SESSION['numPaginaciondepartamentos']+5 >= $numDepartamentosTotal) {
   $mostrarbotonDespues = false;
 }
-$oResultado = DepartamentoPDO::buscaDepartamentoPorDesc($_SESSION['criterioBusquedaDepartamentos']['descripcionBuscada'], $_SESSION['numPaginaciondepartamentos']);
+$oResultado = DepartamentoPDO::buscaDepartamentoPorDesc($_SESSION['criterioBusquedaDepartamentos']['descripcionBuscada'], $_SESSION['numPaginaciondepartamentos'], $_SESSION['criterioBusquedaDepartamentos']['estado']);
 $aResultados = [];
 for ($index = 0; $index < $oResultado->rowCount(); $index++) {
   $oDepartamento = $oResultado->fetchObject();

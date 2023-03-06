@@ -17,11 +17,25 @@ class DepartamentoPDO {
    * 
    * @param String $descDepartamento
    * @param Integer $limiteDepartamento
-   * @return List 
+   * @param Integer $estado 0 para todos, 1 para los que estan de baja 2 para los que estan de alta.
+   * @return List null
    */
-  public static function buscaDepartamentoPorDesc($descDepartamento, $limiteDepartamento) {
-    $sqlBuscarDepartamentoDesc = "SELECT * FROM T02_Departamento WHERE T02_DescDepartamento LIKE '%{$descDepartamento}%' LIMIT {$limiteDepartamento},5;";
-    $oResultado = DBPDO::ejecutarConsulta($sqlBuscarDepartamentoDesc);
+  public static function buscaDepartamentoPorDesc($descDepartamento, $limiteDepartamento, $estado) {
+    $sqlBuscarDepartamentoDescTodos = "SELECT * FROM T02_Departamento WHERE T02_DescDepartamento LIKE '%{$descDepartamento}%' LIMIT {$limiteDepartamento},5;";
+    $sqlBuscarDepartamentoDescAlta = "SELECT * FROM T02_Departamento WHERE T02_DescDepartamento LIKE '%{$descDepartamento}%' AND T02_FechaBaja IS NULL LIMIT {$limiteDepartamento},5;";
+    $sqlBuscarDepartamentoDescBaja = "SELECT * FROM T02_Departamento WHERE T02_DescDepartamento LIKE '%{$descDepartamento}%' AND T02_FechaBaja IS NOT NULL  LIMIT {$limiteDepartamento},5;";
+    if ($estado < 0 || $estado > 2) {
+        return null;
+    }
+    if ($estado == 0) {
+        $oResultado = DBPDO::ejecutarConsulta($sqlBuscarDepartamentoDescTodos);
+    } else {
+        if ($estado == 1){
+            $oResultado = DBPDO::ejecutarConsulta($sqlBuscarDepartamentoDescBaja);
+        } else {
+            $oResultado = DBPDO::ejecutarConsulta($sqlBuscarDepartamentoDescAlta);
+        }
+    }
     return $oResultado;
   }
   
@@ -31,11 +45,25 @@ class DepartamentoPDO {
    * Busca departamentos por su descripcion y devuelve el numero de registros.
    * 
    * @param String $descDepartamento
+   * @param Integer $estado 0 para todos, 1 para los que estan de baja 2 para los que estan de alta.
    * @return Integer 
    */
-  public static function cantidadDepartamentoPorDesc($descDepartamento) {
-    $sqlCantidadDepartamentoDesc = "SELECT * FROM T02_Departamento WHERE T02_DescDepartamento LIKE '%{$descDepartamento}%';";
-    $oResultado = DBPDO::ejecutarConsulta($sqlCantidadDepartamentoDesc);
+  public static function cantidadDepartamentoPorDesc($descDepartamento, $estado) {
+    $sqlBuscarDepartamentoDescTodos = "SELECT * FROM T02_Departamento WHERE T02_DescDepartamento LIKE '%{$descDepartamento}%';";
+    $sqlBuscarDepartamentoDescAlta = "SELECT * FROM T02_Departamento WHERE T02_DescDepartamento LIKE '%{$descDepartamento}%' AND T02_FechaBaja IS NULL;";
+    $sqlBuscarDepartamentoDescBaja = "SELECT * FROM T02_Departamento WHERE T02_DescDepartamento LIKE '%{$descDepartamento}%' AND T02_FechaBaja IS NOT NULL";
+    if ($estado < 0 || $estado > 2) {
+        return null;
+    }
+    if ($estado == 0) {
+        $oResultado = DBPDO::ejecutarConsulta($sqlBuscarDepartamentoDescTodos);
+    } else {
+        if ($estado == 1){
+            $oResultado = DBPDO::ejecutarConsulta($sqlBuscarDepartamentoDescBaja);
+        } else {
+            $oResultado = DBPDO::ejecutarConsulta($sqlBuscarDepartamentoDescAlta);
+        }
+    }
     return $oResultado->rowCount();
   }
 

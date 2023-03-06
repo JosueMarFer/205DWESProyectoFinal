@@ -232,6 +232,28 @@ fieldset {
   margin: 0.5rem;
 }
 
+.formElementRD {
+  display: block;
+  width: 100%;
+  margin: 1rem;
+}
+
+.formElementRD label {
+  display: inline-block;
+  margin: 0.5rem;
+}
+
+.formElementRD input {
+  display: inline-block;
+  color: black;
+  margin: 0.5rem;
+}
+
+.formElementRD p {
+  display: inline-block;
+  margin: 0.5rem;
+}
+
 input[type="submit"] {
   display: inline-block;
   color: white;
@@ -254,6 +276,7 @@ button {
   background-color: #0A0A23;
   padding: 0.5rem;
 }
+button
 button:hover {
   filter: drop-shadow(0rem 0rem 0.2rem white);
 }
@@ -546,4 +569,22 @@ button img:hover {
 
 .crearDepartamento {
   float: right;
+}
+
+.tarjetaPokemon {
+    width: 50%;
+    border: 0.5rem solid white;
+    text-align: center;
+    background-color: #1B1B32;
+}
+.tarjetaPokemon td,tr{
+    border: 0.1rem solid white;
+}
+.imgPokemon{
+    width: 20rem;
+    height: 20rem;
+}
+.spritePokemon {
+    width: 5rem;
+    height: 5rem;
 }
