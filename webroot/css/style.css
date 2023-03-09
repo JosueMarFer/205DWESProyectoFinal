@@ -572,19 +572,75 @@ button img:hover {
 }
 
 .tarjetaPokemon {
-    width: 50%;
-    border: 0.5rem solid white;
-    text-align: center;
-    background-color: #1B1B32;
+  width: 50%;
+  border: 0.5rem solid white;
+  text-align: center;
+  background-color: #1B1B32;
 }
 .tarjetaPokemon td,tr{
-    border: 0.1rem solid white;
+  border: 0.1rem solid white;
 }
 .imgPokemon{
-    width: 20rem;
-    height: 20rem;
+  width: 20rem;
+  height: 20rem;
 }
 .spritePokemon {
-    width: 5rem;
-    height: 5rem;
+  width: 5rem;
+  height: 5rem;
+}
+
+.error {
+  border: solid 3px #FF0000 !important;
+
+}
+.correcto{
+  border: solid 3px #039e1d !important;
+
+}
+
+.captcha {
+  text-align: center;
+  position: relative;
+  width: 390px;
+  height: 250px;
+  display: none;
+}
+
+.cuestion {
+
+  text-align: center;
+  vertical-align: middle;
+  line-height: 50px;
+  font-size: xx-large;
+  width: 50px;
+  height: 50px;
+  float: left;
+  margin: 5px;
+  margin-top: 20px;
+
+}
+
+.resultado {
+  border: thick solid rgb(14, 121, 121);
+
+}
+
+.opcaptcha {
+
+  border: thick solid teal;
+  color: rgb(14, 121, 121);
+  text-align: center;
+  vertical-align: middle;
+  line-height: 50px;
+  font-size: xx-large;
+  width: 50px;
+  height: 50px;
+  float: left;
+  margin: 25px;
+  margin-top: 20px;
+  background-color: lightgray;
+
+}
+.errorCampo {
+    color: red;
 }

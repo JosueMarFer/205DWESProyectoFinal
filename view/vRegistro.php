@@ -1,5 +1,5 @@
 <?php
-/** 
+/**
  * 
  * Vista Registro
  * 
@@ -9,7 +9,8 @@
  * @version 1.0
  */
 ?>
-<form name="ProyectoLoginLogoffTema5Registro" method="post">
+<script defer src="./webroot/scripts/captcha.js"></script>
+<form name="ProyectoLoginLogoffTema5Registro" method="post" id="formulario">
   <fieldset>
     <legend>Registro</legend>
     <div class="formElement">
@@ -41,7 +42,19 @@
       </select>
     </div>
     <div class="formElement">
-      <input type="submit" value="Registrar" name="registro" />
+      <input type="submit" value="Registrar" id="registrar" name="registro" />
+    </div>
+    <div id="captcha" class="captcha">
+      <p>DEMUESTRA QUE NO ERES UN ROBOT:</p>
+      <div id="num1" class="cuestion"></div>
+      <div class="cuestion">+</div>
+      <div id="num2" class="cuestion"></div>
+      <div class="cuestion">=</div>
+      <div class="cuestion resultado"></div>
+
+      <div id="sol1" class="opcaptcha"></div>
+      <div id="sol2" class="opcaptcha"></div>
+      <div id="sol3" class="opcaptcha"></div>
     </div>
   </fieldset>
   <div class="formElement">
